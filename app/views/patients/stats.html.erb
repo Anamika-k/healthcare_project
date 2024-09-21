@@ -1,0 +1,13 @@
+<h1>Patient Registration Stats</h1>
+
+<% if @patient_count.any? %>
+  <ul>
+    <% @patient_count.each do |date, count| %>
+      <li><%= date.strftime("%Y-%m-%d") %>: <%= count %> patients registered</li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No patients registered yet.</p>
+<% end %>
+
+<%= link_to 'Back', doctor_index_patients_path %>

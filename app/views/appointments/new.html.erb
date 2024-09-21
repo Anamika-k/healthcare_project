@@ -1,0 +1,29 @@
+<h1>Create Appointment</h1>
+
+<%= form_with model: @appointment, local: true do |form| %>
+  <div class="field">
+    <%= form.label :patient_id, "Select Patient" %>
+    <%= form.collection_select :patient_id, Patient.all, :id, :name, prompt: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :doctor_id, "Select Doctor" %>
+    <%= form.collection_select :doctor_id, User.where(role: :doctor), :id, :email, prompt: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Appointment" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', appointments_path %>

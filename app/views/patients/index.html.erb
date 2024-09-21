@@ -1,0 +1,37 @@
+<h1>Registered Patients</h1>
+
+<%= form_with url: patients_path, method: :get, local: true do %>
+  <%= label_tag :search, "Search Patients" %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<%= link_to 'Add New Patient', new_patient_path, class: 'btn btn-primary' %>
+<%= link_to 'View Patient Stats', stats_patients_path, class: 'btn btn-secondary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @patients.each do |patient| %>
+      <tr>
+        <td><%= patient.name %></td>
+        <td><%= patient.age %></td>
+        <td><%= patient.gender %></td>
+        <td>
+          <%= link_to 'Show', patient_path(patient), class: 'btn btn-info' %>
+          <%= link_to 'Edit', edit_patient_path(patient), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', patient_path(patient), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
